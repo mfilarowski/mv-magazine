@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurier Bałtycki — Meklemburgia-Pomorze Przednie</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#1a1a1a;
+  --paper:#faf8f4;
+  --muted:#888;
+  --rule:#ccc;
+  --serif:'Playfair Display',Georgia,serif;
+  --body-serif:'Source Serif 4',Georgia,serif;
+  --sans:'Source Sans 3',Helvetica,Arial,sans-serif;
+}
+
+html{background:#e8e4dc}
+
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  max-width:780px;
+  margin:0 auto;
+  border-left:1px solid #ccc;
+  border-right:1px solid #ccc;
+}
+
+/* ── PROGRESS BAR ── */
+#pb{
+  position:fixed;top:0;left:0;right:0;height:3px;width:0%;
+  background:var(--ink);z-index:1001;transition:width .1s linear;
+}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;background:var(--ink);z-index:900}
+.nav-in{display:flex;overflow-x:auto;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav-in a{
+  color:#faf8f4;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 13px;text-decoration:none;border-right:.5px solid #444;
+  white-space:nowrap;transition:background .15s;font-family:var(--sans);
+  font-weight:400;
+}
+.nav-in a:hover,.nav-in a.active{background:#333}
+
+/* ── MASTHEAD ── */
+.masthead{padding:18px 24px 14px;border-bottom:3px solid var(--ink)}
+.dateline{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;
+  font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);border-bottom:.5px solid #999;
+  padding-bottom:6px;margin-bottom:10px;
+}
+.mast-title{
+  font-family:var(--serif);font-size:clamp(38px,10vw,68px);
+  font-weight:900;text-align:center;line-height:1;letter-spacing:-1px;
+}
+.mast-tagline{
+  text-align:center;font-size:clamp(8px,1.8vw,11px);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  border-top:.5px solid #999;padding-top:8px;margin-top:8px;
+}
+
+/* ── SECTIONS ── */
+.section{padding:28px 24px;border-bottom:1px solid var(--rule)}
+.section:last-child{border-bottom:none}
+.section-label{
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:6px;font-family:var(--sans);
+}
+
+/* ── GRID ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:0}
+.grid-1-2{display:grid;grid-template-columns:1fr 2fr;gap:0}
+
+.col{padding:0 18px;border-right:.5px solid var(--rule)}
+.col:first-child{padding-left:0}
+.col:last-child{border-right:none;padding-right:0}
+
+/* ── TYPOGRAPHY ── */
+h1.story{
+  font-family:var(--serif);font-size:clamp(24px,5vw,36px);
+  font-weight:700;line-height:1.15;margin-bottom:8px;
+}
+h2.story{
+  font-family:var(--serif);font-size:clamp(20px,3.5vw,26px);
+  font-weight:700;line-height:1.2;margin-bottom:8px;
+}
+h3.story{
+  font-family:var(--serif);font-size:clamp(14px,2.5vw,17px);
+  font-weight:700;line-height:1.2;margin-bottom:6px;
+}
+.deck{
+  font-family:var(--body-serif);font-size:clamp(13px,2vw,15px);
+  font-style:italic;color:#444;line-height:1.5;margin-bottom:10px;
+}
+.byline{
+  font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);border-bottom:.5px solid var(--rule);
+  padding-bottom:8px;margin-bottom:12px;
+}
+p.body{
+  font-family:var(--body-serif);font-size:clamp(13px,2vw,15px);
+  line-height:1.75;color:#222;margin-bottom:10px;
+}
+p.body:last-child{margin-bottom:0}
+
+/* ── PULLQUOTE ── */
+.pullquote{
+  border-top:2px solid var(--ink);border-bottom:.5px solid var(--rule);
+  padding:12px 0;margin:14px 0;
+}
+.pullquote p{
+  font-family:var(--serif);font-size:clamp(15px,2.5vw,18px);
+  font-style:italic;line-height:1.4;color:var(--ink);
+}
+.pullquote cite{
+  font-size:10px;color:var(--muted);font-style:normal;
+  font-family:var(--sans);display:block;margin-top:6px;
+}
+
+/* ── IMAGE PLACEHOLDER ── */
+.img-ph{
+  background:#d8d4cc;border:.5px solid #bbb;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;color:#777;font-size:10px;
+  text-transform:uppercase;letter-spacing:.06em;
+  text-align:center;padding:12px;width:100%;
+  font-family:var(--sans);
+}
+.img-ph svg{opacity:.5;margin-bottom:8px}
+.img-ph small{font-size:9px;color:#999;margin-top:3px;text-transform:none;letter-spacing:0}
+.caption{
+  font-size:11px;color:#777;font-style:italic;
+  margin-top:5px;margin-bottom:12px;line-height:1.4;
+  font-family:var(--sans);
+}
+
+/* ── DARK BOX ── */
+.dark-box{background:var(--ink);color:#faf8f4;padding:14px 16px;margin:12px 0}
+.dark-box .section-label{color:#aaa}
+.glance-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:5px 0;border-bottom:.5px solid #333;font-size:12px;
+  font-family:var(--sans);
+}
+.glance-row:last-child{border-bottom:none}
+.glance-key{color:#aaa}
+.glance-val{font-weight:600;color:#faf8f4}
+
+/* ── LIGHT BOX ── */
+.light-box{background:#f0ece4;border-left:3px solid var(--ink);padding:10px 14px;margin:12px 0}
+
+/* ── STAT ROW ── */
+.stat-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);
+  margin:14px 0;
+}
+.stat-item{text-align:center;padding:10px 4px;border-right:.5px solid var(--rule)}
+.stat-item:last-child{border-right:none}
+.stat-num{
+  font-family:var(--serif);font-size:clamp(24px,4.5vw,34px);
+  font-weight:900;line-height:1;
+}
+.stat-lbl{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:3px;font-family:var(--sans)}
+
+/* ── WAGE CHART ── */
+.wage-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.wage-lbl{font-family:var(--sans);font-size:11px;width:155px;flex-shrink:0;color:var(--ink)}
+.wage-lbl.hi{font-weight:700}
+.wage-track{flex:1;background:rgba(0,0,0,.09);height:18px}
+.wage-bar{height:100%;background:var(--ink);opacity:.45}
+.wage-bar.hi{background:var(--ink);opacity:1}
+.wage-bar.nat{background:var(--ink);opacity:.7}
+.wage-val{font-family:var(--sans);font-size:11px;width:72px;flex-shrink:0;color:var(--muted);text-align:right}
+.wage-val.hi{font-weight:700;color:var(--ink)}
+.wage-note{font-family:var(--sans);font-size:10px;color:var(--muted);margin-top:6px}
+
+/* ── MAP ── */
+.map-wrap{border:.5px solid #bbb;margin-bottom:6px}
+.map-wrap svg{display:block;width:100%;height:auto}
+
+/* ── TEASER GRID ── */
+.teaser-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid var(--ink);margin-top:20px;
+}
+.teaser{padding:14px 14px 14px 0;border-right:.5px solid var(--rule)}
+.teaser:last-child{border-right:none;padding-right:0}
+.teaser:first-child{padding-left:0}
+.teaser h3{font-family:var(--serif);font-size:14px;font-weight:700;line-height:1.2;margin-bottom:5px}
+.teaser p{font-family:var(--body-serif);font-size:12px;line-height:1.6;color:#444}
+
+/* ── NUMBERS TABLE ── */
+.numbers-table{width:100%;border-collapse:collapse;margin:10px 0}
+.numbers-table td{padding:7px 0;border-bottom:.5px solid #333;font-size:12px;font-family:var(--sans)}
+.numbers-table td:last-child{text-align:right;font-weight:700;font-family:var(--serif);font-size:14px}
+.numbers-table tr:last-child td{border-bottom:none}
+
+/* ── PHRASE TABLE ── */
+.phrase-table{width:100%;border-collapse:collapse;margin-top:8px}
+.phrase-table th{
+  font-size:9px;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--muted);text-align:left;padding-bottom:6px;
+  border-bottom:.5px solid var(--rule);font-weight:400;
+  font-family:var(--sans);
+}
+.phrase-table td{
+  padding:6px 0;border-bottom:.5px solid #eee;
+  font-size:13px;vertical-align:top;font-family:var(--sans);
+}
+.phrase-table td:first-child{font-weight:600;padding-right:14px}
+.phrase-table td:last-child{font-style:italic;color:#555;font-family:var(--body-serif)}
+.phrase-table tr:last-child td{border-bottom:none}
+
+/* ── PLACE CARDS ── */
+.place-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.place-col{padding:0 18px;border-right:.5px solid var(--rule)}
+.place-col:first-child{padding-left:0}
+.place-col:last-child{border-right:none;padding-right:0}
+.place-tag{font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;font-family:var(--sans)}
+
+/* ── PHOTOS ── */
+.photo{display:block;width:100%;height:auto;border:.5px solid #bbb}
+.photo-cover{display:block;width:100%;object-fit:cover;border:.5px solid #bbb}
+
+/* ── BACK TO TOP ── */
+#btt{
+  position:fixed;bottom:1.5rem;right:calc(50% - 390px - 50px);
+  width:38px;height:38px;background:var(--ink);color:#faf8f4;
+  border:none;cursor:pointer;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .3s;z-index:800;
+}
+#btt.vis{opacity:1}
+@media(max-width:900px){#btt{right:1rem}}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);color:#aaa;
+  padding:20px 24px;text-align:center;font-size:11px;
+  letter-spacing:.06em;font-family:var(--sans);
+}
+footer strong{color:#faf8f4}
+
+/* ── RESPONSIVE ── */
+@media(max-width:620px){
+  .masthead{padding:14px 16px 10px}
+  .section{padding:20px 16px}
+  .grid-2,.grid-2-1,.grid-1-2,.grid-3{grid-template-columns:1fr}
+  .col{padding:0;border-right:none;border-bottom:.5px solid var(--rule);padding-bottom:16px;margin-bottom:16px}
+  .col:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+  .teaser-grid,.place-grid{grid-template-columns:1fr}
+  .teaser,.place-col{border-right:none;padding:14px 0;border-bottom:.5px solid var(--rule)}
+  .teaser:last-child,.place-col:last-child{border-bottom:none}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .stat-item:nth-child(2n){border-right:none}
+  .stat-item:nth-child(n+3){border-top:.5px solid var(--rule)}
+}
+</style>
+</head>
+<body>
+
+<div id="pb"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-in">
+    <a href="#region">Region</a>
+    <a href="#hanza">Hanza</a>
+    <a href="#nrd">NRD</a>
+    <a href="#gospodarka">Gospodarka</a>
+    <a href="#spoleczenstwo">Społeczeństwo</a>
+    <a href="#kultura">Kultura</a>
+    <a href="#kuchnia">Kuchnia</a>
+    <a href="#miejsca">Miejsca</a>
+    <a href="#rozm">Rozmówki</a>
+  </div>
+</nav>
+
+<!-- ═══ MASTHEAD ═══ -->
+<header class="masthead">
+  <div class="dateline">
+    <span>Wydanie podróżnicze · Lato 2026</span>
+    <span>Meklemburgia-Pomorze Przednie, Niemcy</span>
+    <span>Nr 1 · EuroVelo 10</span>
+  </div>
+  <div class="mast-title">Kurier Bałtycki</div>
+  <div class="mast-tagline">Tam gdzie morze spotyka żytnie pola · kronika podróżnicza dalekiej północy</div>
+</header>
+
+<!-- ═══ REGION W LICZBACH ═══ -->
+<section class="section" id="region">
+  <div class="grid-2-1">
+    <div class="col">
+      <div class="section-label">Artykuł wstępny</div>
+      <h1 class="story">Kraj zatrzymany w pół kroku między historią a morzem</h1>
+      <p class="deck">Meklemburgia-Pomorze Przednie jest regionem, który sprawia wrażenie, jakby nieco wyszedł z obiegu — i właśnie to jest jego największym atutem.</p>
+      <div class="byline">Od naszego korespondenta · Rostock</div>
+      <p class="body">Jest niewiele zakątków Niemiec tak spokojnie odpornych na nowoczesność jak Meklemburgia-Pomorze Przednie. Stan ciągnie się wzdłuż wybrzeża Bałtyku od Lubeki po polską granicę, oferując krajobraz, który od czasów kupców hanseatyckich z XIV w. zmienił się mniej niż gdziekolwiek indziej.</p>
+      <p class="body">Stolica, Schwerin, majestatycznie spogląda na swoje jezioro, a pałac odbija się w wodach srebrnych o zmierzchu. Dalej na wschód wyspa Rugia — umiłowana przez Caspara Davida Friedricha — oferuje białe klify o teatralnej bieli, opadające pionowo w szarozielony Bałtyk.</p>
+      <div class="pullquote">
+        <p>„To Niemcy, które są — nareszcie — bez pośpiechu. Kraj, w którym przemawia wiatr, a nie autostrady."</p>
+      </div>
+      <p class="body">Region dźwiga jednak złożoność. Dekady NRD, a po nich ekonomiczne turbulencje zjednoczenia, zostawiły swoje ślady: w opuszczonych wsiach, w cichej dumie ludzi, i w prądach politycznych, które od czasu do czasu mącą powierzchowną ciszę. Dla podróżnika gotowego patrzeć głębiej — jeden z najcenniejszych regionów Niemiec.</p>
+    </div>
+    <div class="col">
+      <img src="images/1280px-2019_Rugia-_Nationalpark_Jasmund_-_03.jpg"
+           alt="Klify kredowe Königsstuhl, Park Narodowy Jasmund, Rugia"
+           id="img-rugia-klify" class="photo">
+      <p class="caption">Kredowe klify Königsstuhl na Rugii — takie jak na obrazach Friedricha z 1818 roku, niezmienione.</p>
+
+      <div class="dark-box">
+        <div class="section-label">Region w liczbach</div>
+        <div class="glance-row"><span class="glance-key">Powierzchnia</span><span class="glance-val">23 175 km²</span></div>
+        <div class="glance-row"><span class="glance-key">Ludność (2023)</span><span class="glance-val">1,6 mln</span></div>
+        <div class="glance-row"><span class="glance-key">Linia brzegowa</span><span class="glance-val">1 754 km</span></div>
+        <div class="glance-row"><span class="glance-key">Jeziora</span><span class="glance-val">ponad 2 000</span></div>
+        <div class="glance-row"><span class="glance-key">Noclegi rocznie</span><span class="glance-val">33 miliony</span></div>
+        <div class="glance-row"><span class="glance-key">Stolica</span><span class="glance-val">Schwerin</span></div>
+        <div class="glance-row"><span class="glance-key">Największe miasto</span><span class="glance-val">Rostock</span></div>
+      </div>
+
+      <img src="images/1280px-Aerial_image_of_Schwerin_Castle_(view_from_the_east).jpg"
+           alt="Zamek w Schwerinie z lotu ptaka, widok od wschodu"
+           id="img-schwerin" class="photo" style="margin-top:12px">
+      <p class="caption">Zamek książęcy w Schwerinie, odbity w jeziorze Schweriner See.</p>
+    </div>
+  </div>
+
+  <div class="stat-row" style="margin-top:20px">
+    <div class="stat-item"><div class="stat-num">€37 656</div><div class="stat-lbl">PKB na mieszkańca (2024)</div></div>
+    <div class="stat-item"><div class="stat-num">7,8%</div><div class="stat-lbl">Bezrobocie</div></div>
+    <div class="stat-item"><div class="stat-num">160 tys.</div><div class="stat-lbl">Miejsca pracy w turystyce</div></div>
+    <div class="stat-item"><div class="stat-num">~2 000</div><div class="stat-lbl">Jezior w regionie</div></div>
+  </div>
+</section>
+
+<!-- ═══ ŚWIAT HANZY ═══ -->
+<section class="section" id="hanza">
+  <div class="section-label">Historia — Hanza</div>
+  <h2 class="story">Duch Hanzy: cztery wieki władzy nad Bałtykiem</h2>
+  <p class="deck">Zanim istniały Niemcy, Polska, czy nowoczesna Dania — istniała Hanza. Przez ponad cztery stulecia kupiecka sieć miast bałtyckich kontrolowała handel całej Europy Północnej, dyktowała ceny śledzia i futer, i rozstrzygała spory z królami, odmawiając im kredytu.</p>
+  <div class="byline">Od naszego korespondenta historycznego</div>
+
+  <!-- PART 1: Overview + Map -->
+  <div class="grid-2">
+    <div class="col">
+      <h3 class="story">Narodziny i fundamenty</h3>
+      <p class="body">Hanza nie była ani państwem, ani sojuszem militarnym w dzisiejszym rozumieniu. Była <em>siecią zaufania</em> — systemem wzajemnych gwarancji handlowych, wspólnych wag i miar, i zbiorowej zdolności do bojkotu każdego, kto nie grał według reguł. Pierwsza formalna umowa handlowa między Hamburgiem a Lubeką pochodzi z 1241 roku. Przez kolejne dwa stulecia sieć rozrosła się do ponad 200 miast, od Londynu po Nowogród.</p>
+      <p class="body">Geograficznym fundamentem był sam Bałtyk: stosunkowo spokojne, płytkie, półzamknięte morze, idealnie skrojone pod kogi — płaskodenne statki o ładowności 80–200 ton, zdolne do pływania bez głębokich portów. Sieć rzek — Wisła, Odra, Niemen, Dźwina — łączyła wnętrze kontynentu z wybrzeżem i zamieniała Bałtyk w wielki europejski rynek hurtowy. Lubeka, leżąca na wąskim przesmyku między Bałtykiem a Morzem Północnym, kontrolowała oba światy jednocześnie.</p>
+      <div class="pullquote">
+        <p>„Spichlerze Stralsundu przechowywały niegdyś dość solonego śledzia, by wyżywić połowę Europy przez zimę."</p>
+      </div>
+      <p class="body">Lübeck — dziś w Szlezwiku-Holsztynie, lecz duchowa stolica Hanzy — nosiła tytuł <em>Königin der Hanse</em>, Królowej Hanzy. To tutaj zbierały się wszystkie zjazdy (Hansetage), tu sformułowano <em>prawo lubeckie</em> obowiązujące w ponad stu miastach od Rygi po Bergen. Cztery miasta dzisiejszej Meklemburgii dołączyły do sojuszu niemal od jego zarania: Rostock (1218), Wismar (1229), Stralsund (1234) i Greifswald (1250).</p>
+    </div>
+    <div class="col">
+      <div class="map-wrap">
+        <svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" aria-label="Mapa Meklemburgii-Pomorza Przedniego">
+          <rect width="800" height="460" fill="#c2d4e0"/>
+          <path d="M 0,340 L 800,290 L 800,460 L 0,460 Z" fill="#c8c4b4"/>
+          <path d="M 730,280 L 800,290 L 800,460 L 730,410 Z" fill="#bdb8a6"/>
+          <path d="M 55,276 L 100,270 L 140,268 L 162,274 L 178,288 L 200,298 L 218,290 L 238,278 L 258,268 L 285,252 L 320,234 L 345,232 L 365,238 L 390,245 L 415,248 L 445,252 L 472,232 L 498,218 L 515,218 L 528,228 L 540,240 L 555,252 L 573,257 L 610,260 L 650,262 L 690,264 L 722,268 L 738,408 L 38,408 L 38,310 L 48,290 L 55,276 Z" fill="#d4d8c4" stroke="#9aaa88" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M 488,228 L 473,172 L 482,142 L 508,122 L 548,116 L 608,132 L 635,168 L 632,200 L 618,220 L 588,230 L 548,234 L 518,232 L 488,228 Z" fill="#d4d8c4" stroke="#9aaa88" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M 464,156 L 468,140 L 474,142 L 476,158 L 472,170 L 466,168 Z" fill="#d4d8c4" stroke="#9aaa88" stroke-width="1"/>
+          <path d="M 668,285 L 693,256 L 722,260 L 738,278 L 738,338 L 703,330 L 678,312 L 668,285 Z" fill="#d4d8c4" stroke="#9aaa88" stroke-width="1.5"/>
+          <path d="M 358,240 L 367,218 L 378,200 L 390,178 L 401,172 L 404,178 L 394,184 L 382,204 L 370,222 L 360,244 Z" fill="#d4d8c4" stroke="#9aaa88" stroke-width="1"/>
+          <g stroke="#6a8a9a" stroke-width="1" fill="none" opacity="0.45">
+            <path d="M 30,65 Q 80,55 130,65 Q 180,75 230,65 Q 280,55 330,65 Q 380,75 430,65"/>
+            <path d="M 440,48 Q 490,38 540,48 Q 590,58 640,48 Q 690,38 740,48"/>
+          </g>
+          <g fill="#1a1a1a" stroke="#faf8f4" stroke-width="1.5">
+            <circle cx="323" cy="252" r="5.5"/>
+            <circle cx="194" cy="357" r="6.5"/>
+            <circle cx="515" cy="218" r="4"/>
+            <circle cx="566" cy="252" r="4"/>
+            <circle cx="203" cy="298" r="4"/>
+            <circle cx="256" cy="244" r="3.5"/>
+            <circle cx="545" cy="374" r="4"/>
+          </g>
+          <circle cx="194" cy="357" r="9.5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+          <g font-family="Arial,sans-serif" font-size="11" fill="#1a1a1a">
+            <text x="332" y="249" font-weight="700">Rostock</text>
+            <text x="168" y="376" font-weight="700" font-size="10.5">Schwerin ★</text>
+            <text x="520" y="214">Stralsund</text>
+            <text x="572" y="249">Greifswald</text>
+            <text x="208" y="314" font-size="10">Wismar</text>
+            <text x="200" y="241" font-size="9" fill="#555">Kühlungsborn</text>
+            <text x="550" y="390" font-size="9.5">Neubrandenburg</text>
+          </g>
+          <g font-family="Arial,sans-serif" fill="#4a6a5a" font-style="italic">
+            <text x="555" y="172" font-size="11" text-anchor="middle">Rugia</text>
+            <text x="703" y="298" font-size="9">Uznam</text>
+          </g>
+          <text x="380" y="50" font-family="Arial,sans-serif" font-size="14" fill="#2a5068" text-anchor="middle" font-style="italic" letter-spacing="2">MORZE BAŁTYCKIE</text>
+          <g transform="translate(750,28)">
+            <polygon points="0,0 -5,16 0,12 5,16" fill="#1a1a1a"/>
+            <text x="0" y="28" font-family="Arial,sans-serif" font-size="10" text-anchor="middle" fill="#1a1a1a" font-weight="700">N</text>
+          </g>
+          <g transform="translate(38,438)">
+            <line x1="0" y1="0" x2="144" y2="0" stroke="#555" stroke-width="2"/>
+            <line x1="0" y1="-4" x2="0" y2="4" stroke="#555" stroke-width="1.5"/>
+            <line x1="144" y1="-4" x2="144" y2="4" stroke="#555" stroke-width="1.5"/>
+            <text x="72" y="-7" font-family="Arial,sans-serif" font-size="9" text-anchor="middle" fill="#555">50 km</text>
+          </g>
+        </svg>
+      </div>
+      <p class="caption">Główne miasta i wyspy regionu. Wybrzeże uproszczone.</p>
+
+      <div class="dark-box">
+        <div class="section-label">Miasta hanseatyckie</div>
+        <div class="glance-row"><span class="glance-key">Lübeck</span><span class="glance-val">Królowa Hanzy, 1143</span></div>
+        <div class="glance-row"><span class="glance-key">Rostock</span><span class="glance-val">zał. 1218 · Hansestadt</span></div>
+        <div class="glance-row"><span class="glance-key">Wismar</span><span class="glance-val">zał. 1229 · UNESCO</span></div>
+        <div class="glance-row"><span class="glance-key">Stralsund</span><span class="glance-val">zał. 1234 · UNESCO</span></div>
+        <div class="glance-row"><span class="glance-key">Greifswald</span><span class="glance-val">zał. 1250 · Universitas 1456</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 2: Goods and Transport -->
+  <div style="margin-top:24px;padding-top:20px;border-top:.5px solid var(--rule)">
+    <h3 class="story">Towary i szlaki: co napędzało maszynę</h3>
+  </div>
+  <div class="grid-2" style="margin-top:12px">
+    <div class="col">
+      <p class="body">Hanza nie handlowała wszystkim — handlowała tym, co było niezbędne i trudne do zastąpienia. Trzy główne obwody towarowe wyznaczały kształt imperium.</p>
+      <p class="body"><strong>Obwód śledziowy</strong> był fundamentem. Co rok, od XIII do XV w., gigantyczne ławice śledzia atlantyckiego migrowały przez cieśninę Sund do Zatoki Skańskiej (dziś Falsterbo w Szwecji). Hanza miała sól z Lüneburga — jedynego znaczącego złoża soli na północ od Alp — i miała beczki. Solona ryba w beczkach przeżywała dwa tygodnie drogi morskiej i kolejny tydzień lądowej, docierając na stoły głodującej Europy Środkowej. Zysk na jednym statku załadowanym śledziami był kolosalny.</p>
+      <p class="body"><strong>Obwód zbożowy</strong> biegł z Gdańska (Danzig) i Królewca na zachód. Pruskie i polskie zboże karmiło Niderlandy i Anglię, gdy nieurodzaj puszczał z torbami całe prowincje. Hanza była tym, czym dziś są linie kontenerowe — globalnym łańcuchem dostaw artykułów pierwszej potrzeby.</p>
+      <p class="body"><strong>Obwód luksusowy</strong> łączył Nowogród Wielki z Europą Zachodnią. Rosyjskie i litewskie futra — sobol, bóbr, wiewiórka — wędrowały przez Bałtyk do Lubeki, a dalej do Bruges i Londynu. W drugą stronę płynęły sukno angielskie i flamandzkie, a ze Szwecji — miedź i żelazo z kopalni Falun.</p>
+    </div>
+    <div class="col">
+      <div class="light-box">
+        <div class="section-label">Główne towary Hanzy</div>
+        <p class="body" style="font-size:12.5px;line-height:1.8;margin-top:6px">
+          <strong>Śledź</strong> — bałtycki i skanejski; sól z Lüneburga jako konserwant<br>
+          <strong>Zboże</strong> — z Prus i Polski do głodujących Niderlandów<br>
+          <strong>Futra</strong> — sobol, bóbr, wiewiórka z Nowogrodu<br>
+          <strong>Sukno angielskie</strong> — import z Anglii i Flandrii<br>
+          <strong>Miedź i żelazo</strong> — ze szwedzkich kopalni<br>
+          <strong>Bursztyn bałtycki</strong> — do jubilerstwa w całej Europie<br>
+          <strong>Drewno i smoła</strong> — z Prus do stoczni zachodniej Europy<br>
+          <strong>Wino</strong> — z Renu i Francji do Skandynawii
+        </p>
+      </div>
+      <p class="body">Statkiem roboczym Hanzy był <em>kog</em> (Kogge): płaskodenny, jednomasztowy, o ładowności 80–200 ton, z wysokim, charakterystycznym dziobem. Nie był szybki — ale był tani w eksploatacji i doskonale dostosowany do płytkiego Bałtyku. Jeden szkielet koga z 1380 roku, wydobyty z Bremy w 1962 roku, stoi dziś w Deutsche Schiffahrtsmuseum i jest najlepiej zachowanym przykładem tej epoki.</p>
+    </div>
+  </div>
+
+  <!-- PART 3: Kontors -->
+  <div style="margin-top:24px;padding-top:20px;border-top:.5px solid var(--rule)">
+    <h3 class="story">System kontor: placówki bez paszportów</h3>
+  </div>
+  <div class="grid-2" style="margin-top:12px">
+    <div class="col">
+      <p class="body">Sekretem logistycznym Hanzy były <em>kontory</em> — stałe placówki handlowe w strategicznych miastach Europy, które funkcjonowały jako eksterytorialne enklawy z własnym prawem, własną strażą i zakazem mieszania się z lokalną społecznością. Kupcy hanseatyccy żyli w kontorachmiesiącami, niemal jak mnisi: bez kobiet, bez dzielenia stołu z obcymi, z obowiązkiem wyprowadzania wszystkich transakcji przez kontor.</p>
+      <p class="body">Cztery główne kontory definiowały zasięg imperium. <strong>Steelyard w Londynie</strong> (od ok. 1240) dawał dostęp do angielskiej wełny i sukna; Hanza cieszyła się tam przywilejami, o których angielscy kupcy mogli tylko marzyć. <strong>Bruges</strong> (Brugge) był centrum Europy Zachodniej — tam krzyżowały się szlaki flandryjskie, włoskie i iberyjskie. <strong>Bryggen w Bergen</strong> kontrolował handel norweskim suszonym dorszem (klipfisk); do dziś drewniane magazyny Bryggen stoją jako UNESCO i jako dowód hanseatyckiej obecności. <strong>Piotrogród w Nowogrodzie Wielkim</strong> był bramą do Rusi — futer, wosku i miodu.</p>
+    </div>
+    <div class="col">
+      <div class="pullquote">
+        <p>„Kontor nie był ambasadą ani sklepem. Był immunitetem. Kupiec wchodził do środka i przez miesiące żył pod cudzymi regułami na cudzej ziemi — ale rozliczał się wyłącznie przed Lubeką."</p>
+      </div>
+      <p class="body">Paradoks organizacyjny Hanzy był zarazem jej siłą i słabością. Była <em>otwarta</em> — nowe miasta mogły dołączyć, wnosząc kapitał i porty. Była jednocześnie <em>zamknięta</em> — raz udzielone przywileje handlowe były ściśle monopolizowane. Bez formalnych organów centralnych, bez stałej armii, bez konstytucji — utrzymywała dyscyplinę głównie przez groźbę wykluczenia z sieci handlowej. Kto nie płacił składek lub łamał reguły, zostawał wyłączony z systemu gwarancji kredytowych, co było ekonomicznym wyrokiem śmierci.</p>
+    </div>
+  </div>
+
+  <!-- PART 4: Black Death + Peak -->
+  <div style="margin-top:24px;padding-top:20px;border-top:.5px solid var(--rule)">
+    <h3 class="story">Czarna Śmierć jako katalizator</h3>
+  </div>
+  <div class="grid-2" style="margin-top:12px">
+    <div class="col">
+      <p class="body">W latach 1347–1351 dżuma zabiła od jednej czwartej do jednej trzeciej populacji Europy. Dla większości instytucji była to katastrofa nie do przeżycia. Dla Hanzy okazała się katalizatorem.</p>
+      <p class="body">Miasta hanseatyckie — z lepszą infrastrukturą magazynową, systemami kwarantanny i rezerwami żywności — przeżyły proporcjonalnie lepiej niż obszary wiejskie. Śmierć milionów zredukowała liczbę pośredników, przez których przechodził towar — co paradoksalnie skoncentrowało handel na niezawodnych sieciach. Hanza była najniezawodniejszą siecią na północy Europy.</p>
+      <p class="body">Szczyt śledzia skanejskiego przypadł właśnie na dekady po dżumie: rekordowe połowy, rekordowe ceny, rekordowe zyski dla Stralsundu i Lubeki. Traktat ze Stralsundu z 1370 roku — w którym Hanza zmusiła króla Danii do rezygnacji z ceł na Sund i udziału w dochodach z portów — był demonstracją władzy, jakiej żaden pojedynczy stan nie osiągnął przez kolejne stulecia.</p>
+    </div>
+    <div class="col">
+      <div class="dark-box">
+        <div class="section-label">Hanza w datach kluczowych</div>
+        <table class="numbers-table">
+          <tr><td style="color:#ccc">Umowa Hamburg–Lubeka</td><td>1241</td></tr>
+          <tr><td style="color:#ccc">Kontor w Nowogrodzie</td><td>ok. 1270</td></tr>
+          <tr><td style="color:#ccc">Czarna Śmierć w Europie</td><td>1347–51</td></tr>
+          <tr><td style="color:#ccc">Traktat ze Stralsundu</td><td>1370</td></tr>
+          <tr><td style="color:#ccc">Szczyt: ~200 miast</td><td>ok. 1400</td></tr>
+          <tr><td style="color:#ccc">Ławice śledzia opuszczają Skanię</td><td>ok. 1425</td></tr>
+          <tr><td style="color:#ccc">Ostatni Hansetag</td><td>1669</td></tr>
+          <tr><td style="color:#ccc">UNESCO: Stralsund i Wismar</td><td>2002</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 5: Collapse -->
+  <div style="margin-top:24px;padding-top:20px;border-top:.5px solid var(--rule)">
+    <h3 class="story">Przyczyny upadku: pięć uderzeń, które rozkruszyły imperium</h3>
+  </div>
+  <div class="grid-2" style="margin-top:12px">
+    <div class="col">
+      <p class="body"><strong>1. Zniknięcie śledzia skanejskiego.</strong> Około 1425 roku ławice śledzia atlantyckiego zmieniły trasy migracyjne i przeniosły się na Morze Północne — pod holenderskie sieci. Stralsund i Lubeka straciły główny surowiec, na którym zbudowały bogactwo. Hanza nie umiała się przestawić na nowy zasób, bo nie kontrolowała Morza Północnego.</p>
+      <p class="body"><strong>2. Holenderski fluit (1595).</strong> Nowy typ statku niderlandzkiego — tańszy w budowie, o znacznie większej ładowności i mniejszej załodze — podciął ceny hanseatyckich kogów na każdej trasie. Gdy Holenderzy przeszli na handel masowy zbożem bałtyckim, wypierając Hanzę, stało się to dosłownie w ciągu jednego pokolenia.</p>
+      <p class="body"><strong>3. Angielscy kupcy przygodni.</strong> Od połowy XV w. <em>Merchant Adventurers</em> — angielskie stowarzyszenie kupieckie — z powodzeniem łamali hanseatycki monopol na eksport angielskiego sukna. W 1553 roku Anglicy wypędzili Hanzę z Londy&#324;skiego Steelyard.</p>
+    </div>
+    <div class="col">
+      <p class="body"><strong>4. Wzrost państw narodowych.</strong> Anglia, Dania i Niderlandy zbudowały własne floty wojenne i własne polityki handlowe. Hanza, bez armii i bez suwerena, polegała na zbiorowym nacisku ekonomicznym — co przestało działać, gdy naprzeciw stały królewskie fregaty.</p>
+      <p class="body"><strong>5. Wewnętrzne rozproszenie.</strong> Dwieście miast miało dwieście różnych interesów. Gdy Lubeka chciała embarga na Anglię, Hamburg wolał handel. Gdy Gdańsk potrzebował pokoju z Polską, Stralsund chciał presji. Bez centralnej władzy egzekwującej decyzje zbiorowe sieć zaczęła rozpadać się od środka. Na ostatnim Hansetagu w 1669 roku zasiadło zaledwie dziewięć miast.</p>
+      <div class="pullquote">
+        <p>„Hanza nie umarła od jednego ciosu. Rozpadła się powoli, jak stara beczka po śledziu — szew po szwie, klepka po klepce."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="teaser-grid">
+    <div class="teaser">
+      <div class="section-label">Dziedzictwo</div>
+      <h3>Stralsund i Wismar: jedyny wspólny wpis UNESCO dwóch różnych miast</h3>
+      <p>Gotyckie cegły z XIV w., szczyty kamienic wzorowane na flamandzkich. Można dosłownie czytać historię Hanzy z elewacji.</p>
+    </div>
+    <div class="teaser" style="padding-left:14px">
+      <div class="section-label">Lübeck dziś</div>
+      <h3>Królewska głowa bez ciała: stolica Hanzy w Szlezwiku-Holsztynie</h3>
+      <p>Dziś w sąsiednim landzie, Lübeck zachowuje tytuł <em>Hansestadt</em>, prawo lubeckie i Holstentor jako symbol. Warta wizyty przy granicy.</p>
+    </div>
+    <div class="teaser" style="padding-left:14px">
+      <div class="section-label">Żywe dziedzictwo</div>
+      <h3>Moin — powitanie ze wspólnej tradycji hanseatyckiej Północy</h3>
+      <p>Rostock i Hamburg mówią tak samo. Tożsamość hanseatycka chroni MV przed kulturowym kompleksem niższości widocznym na głębszym wschodzie Niemiec.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LATA NRD ═══ -->
+<section class="section" id="nrd">
+  <div class="section-label">Historia — NRD</div>
+  <h2 class="story">Kolektywizacja, stocznie i ucieczki przez Bałtyk</h2>
+  <p class="deck">Region wszedł w erę NRD jako rolnicza peryferia i wyszedł z niej jako rolnicza peryferia — tyle że z nową zabudową z wielkiej płyty, zrujnowanym przemysłem okrętowym i połową ludności mniej.</p>
+  <div class="byline">Od naszego korespondenta historycznego · Rostock</div>
+
+  <div class="grid-2">
+    <div class="col">
+      <h3 class="story">Akcja Róża — 1953</h3>
+      <p class="body">W nocy z 9 na 10 lutego 1953 roku, w tajnej operacji <em>Aktion Rose</em>, władze NRD wywłaszczyły setki prywatnych właścicieli pensjonatów i restauracji na wybrzeżu Bałtyku. Właściciele dostali kilka godzin na spakowanie. Rząd twierdził, że uderzył w „zachodnich szpiegów" — w rzeczywistości chodziło o przejęcie kontroli nad turystyką nadmorską i likwidację niezależnych przedsiębiorców. Skutki były widoczne przez dekady: zabytkowe wille stały zaniedbane jako „własność państwowa", aż do prywatyzacji po 1990 roku.</p>
+
+      <h3 class="story">Przepłynął Bałtyk — 1971</h3>
+      <p class="body">Latem 1971 roku pewien trzydziestojed&#x0144;oletni lekarz z Rostoku przez dziewięć miesięcy trenował potajemnie w zimnej wodzie. 25 lipca 1971 roku <strong>Peter Döbler</strong> wszedł do wody w Kühlungsborn. Dyplomy lekarskie zawinął w wodoszczelną folię i schował za pasek. Przez 25 godzin płynął w ciemności, orientując się po gwiazdach i kompasie, aż wylądował na brzegu wyspy Fehmarn w Niemczech Zachodnich — 48 km dalej. Najdłuższe udokumentowane bałtyckie przejście ucieczkowe w historii. Muzeum w Kühlungsborn przechowuje dokumentację tej przeprawy.</p>
+
+      <div class="pullquote">
+        <p>„Płynąłem po gwiazdach. Wiedziałem: jeśli dotrę do rana, będę wolny. Jeśli nie — wrócę do więzienia albo nie wrócę w ogóle."</p>
+        <cite>— Peter Döbler, rekonstrukcja (Kühlungsborn, 1971)</cite>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dark-box">
+        <div class="section-label">Wieże strażnicze NRD</div>
+        <div class="glance-row"><span class="glance-key">Zbudowanych na wybrzeżu</span><span class="glance-val">27 (typ BT11)</span></div>
+        <div class="glance-row"><span class="glance-key">Przetrwały</span><span class="glance-val">2</span></div>
+        <div class="glance-row"><span class="glance-key">Otwartych dla zwiedzających</span><span class="glance-val">1 (Kühlungsborn)</span></div>
+        <div class="glance-row"><span class="glance-key">Zabytek od</span><span class="glance-val">1991</span></div>
+      </div>
+
+      <h3 class="story">Pogrom w Lichtenhagen — 1992</h3>
+      <p class="body">Dwa lata po zjednoczeniu, w sierpniu 1992 roku, w Rostock-Lichtenhagen doszło do najpoważniejszych od czasów nazizmu zbiorowych ataków na tle rasowym w Niemczech. Przez cztery dni tłum — przy bierności policji — atakował Dom Chłopaków Słonecznika, gdzie mieszkali wietnamska pracownicy i wnioskodawcy o azyl. Nikt z głównych sprawców nie poniósł poważnych konsekwencji. Zdarzenie jest dziś jednym z najintensywniej badanych epizodów postzjednoczeniowych Niemiec.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GOSPODARKA ═══ -->
+<section class="section" id="gospodarka">
+  <div class="section-label">Gospodarka</div>
+  <h2 class="story">Po zjednoczeniu: na końcu tabeli płac</h2>
+  <p class="deck">Meklemburgia-Pomorze Przednie ma najniższe mediany wynagrodzeń spośród wszystkich szesnastu landów Niemiec. Różnica względem Hamburga: ponad tysiąc dwieście euro miesięcznie.</p>
+  <div class="byline">Od naszego korespondenta ekonomicznego · Berlin</div>
+
+  <div class="grid-2">
+    <div class="col">
+      <h3 class="story" style="font-size:13px;margin-bottom:8px">Mediana miesięcznych wynagrodzeń brutto (grudzień 2024)</h3>
+      <div style="margin-bottom:14px">
+        <div class="wage-row"><span class="wage-lbl">Hamburg</span><div class="wage-track"><div class="wage-bar" style="width:100%"></div></div><span class="wage-val">€4 527</span></div>
+        <div class="wage-row"><span class="wage-lbl">Baden-Württemberg</span><div class="wage-track"><div class="wage-bar" style="width:96.2%"></div></div><span class="wage-val">€4 356</span></div>
+        <div class="wage-row"><span class="wage-lbl">Hessen</span><div class="wage-track"><div class="wage-bar" style="width:95.5%"></div></div><span class="wage-val">€4 325</span></div>
+        <div class="wage-row"><span class="wage-lbl nat">▶ Mediana krajowa</span><div class="wage-track"><div class="wage-bar nat" style="width:88.6%"></div></div><span class="wage-val">€4 013</span></div>
+        <div class="wage-row"><span class="wage-lbl">Brandenburg</span><div class="wage-track"><div class="wage-bar" style="width:75.2%"></div></div><span class="wage-val">€3 402</span></div>
+        <div class="wage-row"><span class="wage-lbl">Saksonia</span><div class="wage-track"><div class="wage-bar" style="width:74.8%"></div></div><span class="wage-val">€3 388</span></div>
+        <div class="wage-row"><span class="wage-lbl">Saksonia-Anhalt</span><div class="wage-track"><div class="wage-bar" style="width:74.1%"></div></div><span class="wage-val">€3 353</span></div>
+        <div class="wage-row"><span class="wage-lbl">Turyngia</span><div class="wage-track"><div class="wage-bar" style="width:73.1%"></div></div><span class="wage-val">€3 307</span></div>
+        <div class="wage-row"><span class="wage-lbl hi">◀ Meklemburgia-PP</span><div class="wage-track"><div class="wage-bar hi" style="width:72.8%"></div></div><span class="wage-val hi">€3 294</span></div>
+        <p class="wage-note">Źródło: Bundesagentur für Arbeit, grudzień 2024. Pełnoetatowi pracownicy objęci ubezpieczeniem społecznym.</p>
+      </div>
+    </div>
+    <div class="col">
+      <p class="body">Gdy NRD upadł w 1989 roku, wszystkie trzy filary regionalnej gospodarki upadły razem: wielkie stocznie Rostoku i Wismaru — sprzedane lub rozebrane; rolnictwo kolektywne — wymagające bolesnej restrukturyzacji; państwowa flota rybacka — rozwiązana. W jednym pokoleniu znikł cały model ekonomiczny.</p>
+      <div class="pullquote">
+        <p>„Młodzi wyjeżdżają do Hamburga i Berlina. Starsi zostają i głosują z protestu. Turystyka wypełnia lukę — na razie."</p>
+      </div>
+      <p class="body">Dziś gospodarka spoczywa na kilku niestabilnych filarach. <strong>Turystyka</strong> (160 tys. miejsc pracy) jest strukturalnie wrażliwa na koniunkturę. <strong>Rząd stanowy i federalny</strong> to faktycznie największy pracodawca. <strong>Rolnictwo</strong> — zboże i rzepak na dawnych polach LPG. <strong>Stocznie</strong> w Rostoku, Stralsundzie i Wismarze bankrutują i restrukturyzują się mniej więcej raz na dekadę. <strong>Energia odnawialna</strong> — offshore wind — to jeden z niewielu sektorów z potencjałem wzrostu płac.</p>
+      <p class="body">Paradoks nieruchomości: ceny wyglądają tanio w porównaniu z Monachium, ale na wybrzeżu i wyspach turystyczne apartamenty wypchnęły lokalne rodziny poza zasięg rynku. Przy najniższych płacach w Niemczech jest to podwójny cios.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SPOŁECZEŃSTWO ═══ -->
+<section class="section" id="spoleczenstwo">
+  <div class="section-label">Społeczeństwo</div>
+  <h2 class="story">Skąd jesteś i co z tego wynika</h2>
+  <p class="deck">Meklemburgia jest jednym z bardziej jednorodnych etnicznie regionów Niemiec — paradoks w miejscu, które przez całą historię było obszarem ciągłej migracji.</p>
+  <div class="byline">Analiza · Kurier Bałtycki</div>
+
+  <div class="grid-2">
+    <div class="col">
+      <p class="body">Po 1945 roku przez region przewaliło się sześć fal migracyjnych: <strong>910 tys. wysiedlonych Niemców</strong> ze Śląska i Prus (1945–46); <strong>60 tys. wietnamskich robotników kontraktowych NRD</strong> (od ok. 1980, najliczniejsza mniejszość do dziś); <em>Russlanddeutsche</em> z byłego ZSRR po 1990; polscy migranci zarobkowi po 2004; 23 tys. syryjskich uchodźców w 2015 roku; i Sinti i Romowie, obecni od XIV w.</p>
+      <p class="body">Badania jakościowe prowadzone wśród kobiet z tłem migracyjnym w MV pokazują spójny obraz. Dyskryminacja nie ma tu zazwyczaj formy spektakularnej przemocy — to raczej „nakłucia": pytania o pochodzenie przy każdej rozmowie, komentarze o poprawności języka, automatyczne zakwestionowanie przynależności. Efekt jest jednak systemowy: trudności ze znalezieniem mieszkania, gorsza obsługa w gabinetach lekarskich, szkoły gdzie nauczyciele mają inne oczekiwania wobec dzieci z obcobrzmiącymi nazwiskami.</p>
+      <div class="pullquote">
+        <p>„Muszę pracować dwa razy ciężej, żeby być postrzeganą jako tak samo kompetentna."</p>
+        <cite>— Kobieta z tłem migracyjnym, MV, badania wir-hier-in-mv.de</cite>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dark-box">
+        <div class="section-label">W liczbach</div>
+        <table class="numbers-table">
+          <tr><td style="color:#ccc">Odsetek z tłem migracyjnym</td><td>~4,8%</td></tr>
+          <tr><td style="color:#ccc">Wynik AfD (wybory 2021)</td><td>18,3%</td></tr>
+          <tr><td style="color:#ccc">SPD rządzi nieprzerwanie od</td><td>1990</td></tr>
+          <tr><td style="color:#ccc">Till Backhaus, min. rolnictwa od</td><td>1996</td></tr>
+        </table>
+      </div>
+      <p class="body">MV rozwinęło się politycznie inaczej niż Saksonia czy Turyngia. Hanzeatycka tożsamość i dolnoniemiecki dialekt dają mieszkańcom Rostoku wspólny grunt kulturowy z Hamburgiem i Kilonią — podczas gdy Saksończycy czują się kulturowo wyśmiewani przez Zachód. To może tłumaczyć, dlaczego wyniki AfD w MV są bliższe wiejskim stanom zachodnioniemieckim niż ekstremom wschodnich Niemiec.</p>
+      <div class="light-box">
+        <div class="section-label">Uwaga dla podróżników</div>
+        <p class="body" style="font-size:13px;margin-top:6px">Miasta — Rostock, Stralsund, Greifswald — są znacznie bardziej otwarte niż mniejsze miejscowości. Zaufaj swojej intuicji. Uroki regionu są realne, podobnie jak potrzeba trzeźwej oceny jego społecznej geografii.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KULTURA ═══ -->
+<section class="section" id="kultura">
+  <div class="section-label">Kultura i sztuka</div>
+  <h2 class="story">Krawędź nieba i morza: artyści, pisarze, ofiary</h2>
+  <p class="deck">Meklemburgia wydała kilku artystów, których cień jest dużo większy niż sam region. Caspar David Friedrich — zrodzony z bałtyckiego światła — zmienił sposób, w jaki zachód patrzy na naturę.</p>
+  <div class="byline">Od naszego korespondenta kulturalnego · Greifswald</div>
+
+  <div class="grid-2">
+    <div class="col">
+      <img src="images/1280px-Caspar_David_Friedrich_-_Der_Mönch_am_Meer_-_Google_Art_Project.jpg"
+           alt="Caspar David Friedrich — Mnich nad morzem (1808–1810)"
+           id="img-cdf" class="photo">
+      <p class="caption">Friedrich malował Rugię wielokrotnie — kredowe klify są niezmienione od jego czasów.</p>
+      <h3 class="story">Caspar David Friedrich</h3>
+      <p class="body">Friedrich urodził się w 1774 roku w Greifswald i przez całe życie malował bałtyckie światło. <em>Mnich nad morzem</em> (1808–10) i <em>Opactwo w dębowym lesie</em> — oba zakupione przez następcę tronu pruskiego na wystawie berlińskiej — były rewolucyjne: człowiek stał tyłem do widza, patrząc w nieskończoność natury. Krajobraz przestał być tłem — stał się tematem. Greifswald przechowuje rysunki i kilka płócien w muzeum miejskim.</p>
+    </div>
+    <div class="col">
+      <h3 class="story">Gerhart Hauptmann i Hans Fallada</h3>
+      <p class="body">Noblista z 1912 roku (literatura) mieszkał na bezsamochodowej wyspie Hiddensee od lat 20. XX w. do śmierci w 1946 roku. Kontrowersyjny — nie emigrował po 1933 roku. Dom na Hiddensee jest dziś muzeum. Wyspa dostępna wyłącznie promem.</p>
+      <p class="body">Hans Fallada urodził się w Greifswald, wychował w Rostoku. Pseudonim wziął od konia z bajki Grimma — konia, który mówił prawdę po śmierci. <em>Każdy umiera w samotności</em>, napisany w 24 dni w 1947 roku, jest jednym z najważniejszych dokumentów cichego oporu moralnego w nazistowskich Niemczech.</p>
+      <h3 class="story">Cap Arcona — ostatnia zbrodnia</h3>
+      <p class="body">3 maja 1945 roku, cztery dni przed kapitulacją, brytyjskie samoloty zbombardowały statek <em>Cap Arcona</em> w Zatoce Lubeckiej. Na pokładzie znajdowało się ponad 7 000 więźniów obozów koncentracyjnych, ewakuowanych z Neuengamme. Zginęło ponad 5 500 osób. Piloci nie wiedzieli o więźniach. Nikt nie poniósł odpowiedzialności. Na cmentarzach wybrzeża MV leżą szczątki tych, których morze wyrzuciło na plaże.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KUCHNIA ═══ -->
+<section class="section" id="kuchnia">
+  <div class="section-label">Kuchnia i jedzenie</div>
+  <h2 class="story">Srebrna ryba: miłosny list do bałtyckiego śledzia</h2>
+  <p class="deck">Przez stulecia śledź był olejem napędowym Europy Północnej. W Warnemünde przy nabrzeżu Alter Strom stoi dziś piętnastu rybaków — w porównaniu z osiemdziesięcioma w czasach NRD.</p>
+  <div class="byline">Od naszego korespondenta kulinarnego · Warnemünde</div>
+
+  <div class="grid-1-2">
+    <div class="col">
+      <img src="images/alter_strom_herring.png"
+           alt="Śledź na targu rybnym przy Alter Strom, Warnemünde"
+           id="img-herring-market" class="photo-cover" style="height:280px">
+      <p class="caption">Świeżo wędzony śledź przy nabrzeżu Alter Strom — wybór purystów.</p>
+      <div class="light-box">
+        <div class="section-label">Słownik śledzia</div>
+        <p class="body" style="font-size:12.5px;line-height:1.85;margin-top:6px">
+          <strong>Bismarck-Hering</strong> — marynowany w occie z cebulą<br>
+          <strong>Geräucherter Hering</strong> — wędzony na zimno lub ciepło<br>
+          <strong>Matjes</strong> — młody, łagodny, z cienkiego filetu<br>
+          <strong>Rollmops</strong> — zwinięty wokół ogórka. Kontrowersyjny. Konieczny.<br>
+          <strong>Labskaus</strong> — pasta z solonego mięsa, ziemniaków i śledzia
+        </p>
+      </div>
+    </div>
+    <div class="col">
+      <p class="body">Stań przy stoisku rybnym w Warnemünde w czwartkowy poranek, a natychmiast zrozumiesz, że to miejsce, gdzie śledź jest traktowany poważnie. Nie jako relikt ani osobliwość — ale jako żywa tradycja kulinarna, równie bezpretensjonalna jak bagietki w Paryżu.</p>
+      <p class="body">Bałtycki śledź — mniejszy, chudszy i subtelniejszy od swojego atlantyckiego kuzyna — utrzymywał populacje tego wybrzeża przez co najmniej tysiąc lat. Ekonomiczna potęga Stralsundu w XIV w. zbudowana była prawie wyłącznie na handlu śledziem: ogromne ławice pojawiały się w Bałtyku co jesień, a kupcy miasta mieli sól, beczki i sieć dystrybucji.</p>
+      <div class="pullquote">
+        <p>„Dobry Matjes nie potrzebuje nic poza chlebem, masłem i zimnym rieslingiem. Reszta to dekoracja."</p>
+      </div>
+      <p class="body">Ta historia nadaje współczesnemu jedzeniu śledzia wagę wykraczającą poza gastronomię. Zjeść wędzoną rybę przy kei, patrząc jak promy przychodzą i odchodzą, to uczestnictwo w czymś naprawdę starożytnym. Ryba kosztuje może 2,50 euro. Doświadczenie jest bezcenne.</p>
+      <div class="dark-box">
+        <div class="section-label">Kryzys bałtyckiego śledzia</div>
+        <p class="body" style="color:#e8e4dc;font-size:13px;margin-top:8px">Populacja bałtyckiego śledzia spadła o <strong style="color:#fff">80%</strong> od lat 90. ICES (Międzynarodowa Rada Badań Morza) rekomenduje zerowe kwoty połowów. UE regularnie przegłosowuje wyższe. 20 jednostek przemysłowych łowi 95% ryb — reszta trafia jako pasza dla łososi w norweskich farmach. Dorsz bałtycki zakazany od 2019 roku. Śledź zmierza w tym samym kierunku. W Warnemünde: 15 rybaków dziś vs. 80 za czasów NRD.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MIEJSCA ═══ -->
+<section class="section" id="miejsca">
+  <div class="section-label">Podróże</div>
+  <h2 class="story">Dziewięć miejsc wartych objazdu</h2>
+  <p class="deck">Nie próbuj zobaczyć wszystkiego. Zrób listę pięciu i jedź powoli.</p>
+
+  <img src="images/1280px-2019_Rugia-_Nationalpark_Jasmund_-_03.jpg"
+       alt="Park Narodowy Jasmund, Rugia — klify kredowe nad Bałtykiem"
+       id="img-panorama" class="photo-cover" style="height:240px;width:100%">
+  <p class="caption">Park Narodowy Jasmund, Rugia — kredowe klify Königsstuhl opadają pionowo do Bałtyku. UNESCO od 2011 r.</p>
+
+  <div class="place-grid">
+    <div class="place-col">
+      <span class="place-tag">UNESCO · Hanza</span>
+      <h3 class="story" style="font-size:15px;margin-bottom:6px">Stralsund</h3>
+      <p class="body" style="font-size:13px">Stare miasto na wyspie otoczonej wodą. Ratusz i kościół Mariacki z XIV w. Oceaneum — jedne z najlepszych akwariów w Niemczech. Punkt wypadowy na Rugię. Jedź tu w tygodniu — weekend jest zatłoczony.</p>
+
+      <span class="place-tag" style="margin-top:14px">UNESCO · Hanza</span>
+      <h3 class="story" style="font-size:15px;margin-bottom:6px">Wismar</h3>
+      <p class="body" style="font-size:13px">Spokojniejszy niż Stralsund. Stary rynek z XVII-wieczną studnią Wasserkunst, ruiny kościoła Marienkirche (wieża stoi, nawa zburzona przez NRD). Port z małymi kutrami rybackimi. Festiwal śledzia w marcu.</p>
+
+      <span class="place-tag" style="margin-top:14px">Przyroda · Historia</span>
+      <h3 class="story" style="font-size:15px;margin-bottom:6px">Rugia</h3>
+      <p class="body" style="font-size:13px">Największa wyspa Niemiec. Klify kredowe Jasmund (UNESCO). Prora — 6 km betonu na plaży (nazistowski obóz KdF). Hiddensee bez samochodów dostępna promem. Latem tłumy; wiosną i jesienią — cisza.</p>
+    </div>
+
+    <div class="place-col">
+      <span class="place-tag">NRD · Kurort</span>
+      <h3 class="story" style="font-size:15px;margin-bottom:6px">Kühlungsborn</h3>
+      <p class="body" style="font-size:13px">Największe nadmorskie uzdrowisko MV. Jedyna zachowana i otwarta wieża strażnicza NRD. Kolej wąskotorowa Molli do Bad Doberan. Z tutaj ruszył Peter Döbler na swój bałtycki maraton.</p>
+
+      <span class="place-tag" style="margin-top:14px">Port · Plaża</span>
+      <h3 class="story" style="font-size:15px;margin-bottom:6px">Warnemünde</h3>
+      <p class="body" style="font-size:13px">Dzielnica Rostoku przy ujściu Warny do morza. Latarnia morska z 1898 r. Targ rybny na Alter Strom rano od wiosny. Teepott z 1968 r. — budowla jak latający spodek przy plaży.</p>
+
+      <span class="place-tag" style="margin-top:14px">Historia · Technika</span>
+      <h3 class="story" style="font-size:15px;margin-bottom:6px">Peenemünde (Uznam)</h3>
+      <p class="body" style="font-size:13px">Tu powstała rakieta V2 — pierwsza na świecie, 1942. Muzeum Techniki Historycznej: geniusz inżynierski + praca niewolnicza z obozów koncentracyjnych. Bez retuszu. Rdzewiejące hale, prawdziwe eksponaty.</p>
+    </div>
+
+    <div class="place-col">
+      <span class="place-tag">Historia · Kurort</span>
+      <h3 class="story" style="font-size:15px;margin-bottom:6px">Heiligendamm</h3>
+      <p class="body" style="font-size:13px">Pierwsze nadmorskie uzdrowisko Niemiec, 1793 r. Książę Meklemburgii zobaczył Margate w Anglii i zbudował własne. Białe klasycystyczne wille przy morzu. Szczyt G8 w 2007 r. Dziś Grand Hotel.</p>
+
+      <span class="place-tag" style="margin-top:14px">Sztuka · Wioska</span>
+      <h3 class="story" style="font-size:15px;margin-bottom:6px">Ahrenshoop</h3>
+      <p class="body" style="font-size:13px">Kolonia artystyczna na Fischland-Darß od XIX w. Malarze przyjeżdżali za tym światłem. Słomiane dachy, galerie, cisza. Zwana „Prenzlauer Berg nad morzem" od liczby berlińczyków z domami.</p>
+
+      <span class="place-tag" style="margin-top:14px">Natura · Półwysep</span>
+      <h3 class="story" style="font-size:15px;margin-bottom:6px">Fischland-Darß-Zingst</h3>
+      <p class="body" style="font-size:13px">Wąski półwysep między Bałtykiem a Bodden. Jesienna migracja żurawi — setki tysięcy ptaków. Plaże zachodniej części (Darß) dzikie, bez infrastruktury. Biały, drobny piasek.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ROZMÓWKI ═══ -->
+<section class="section" id="rozm">
+  <div class="section-label">Przewodnik językowy</div>
+  <h2 class="story">Przydatne zwroty po niemiecku</h2>
+  <p class="deck">Kilka zdań po niemiecku to przepustka do innego rodzaju kontaktu. Nawet jedno słowo w języku gospodarzy otwiera inaczej.</p>
+
+  <div class="grid-2">
+    <div class="col">
+      <h3 class="story" style="font-size:14px;margin-bottom:8px">Podstawy i grzeczności</h3>
+      <table class="phrase-table">
+        <thead><tr><th>Po polsku</th><th>Auf Deutsch</th></tr></thead>
+        <tbody>
+          <tr><td>Dzień dobry</td><td>Guten Morgen / Guten Tag</td></tr>
+          <tr><td>Cześć (nieformalnie)</td><td>Hallo / Moin</td></tr>
+          <tr><td>Do widzenia</td><td>Auf Wiedersehen / Tschüss</td></tr>
+          <tr><td>Proszę</td><td>Bitte</td></tr>
+          <tr><td>Dziękuję</td><td>Danke (schön)</td></tr>
+          <tr><td>Przepraszam</td><td>Entschuldigung</td></tr>
+          <tr><td>Nie rozumiem</td><td>Ich verstehe nicht</td></tr>
+          <tr><td>Czy mówisz po angielsku?</td><td>Sprechen Sie Englisch?</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="story" style="font-size:14px;margin-bottom:8px;margin-top:18px">W restauracji</h3>
+      <table class="phrase-table">
+        <thead><tr><th>Po polsku</th><th>Auf Deutsch</th></tr></thead>
+        <tbody>
+          <tr><td>Menu, proszę</td><td>Die Speisekarte, bitte</td></tr>
+          <tr><td>Rachunek poproszę</td><td>Die Rechnung, bitte</td></tr>
+          <tr><td>Smacznego</td><td>Guten Appetit</td></tr>
+          <tr><td>To było pyszne!</td><td>Das war lecker!</td></tr>
+          <tr><td>Płacę kartą</td><td>Ich zahle mit Karte</td></tr>
+          <tr><td>Stół dla dwóch</td><td>Einen Tisch für zwei, bitte</td></tr>
+          <tr><td>Na zdrowie!</td><td>Prost!</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <h3 class="story" style="font-size:14px;margin-bottom:8px">Droga i transport</h3>
+      <table class="phrase-table">
+        <thead><tr><th>Po polsku</th><th>Auf Deutsch</th></tr></thead>
+        <tbody>
+          <tr><td>Gdzie jest ścieżka rowerowa?</td><td>Wo ist der Radweg?</td></tr>
+          <tr><td>Kiedy następny prom?</td><td>Wann fährt die nächste Fähre?</td></tr>
+          <tr><td>Czy mogę wziąć rower?</td><td>Kann ich mein Fahrrad mitnehmen?</td></tr>
+          <tr><td>Mam przebitą oponę</td><td>Ich habe einen Platten</td></tr>
+          <tr><td>Ile kosztuje?</td><td>Was kostet das?</td></tr>
+          <tr><td>Gdzie jest dworzec?</td><td>Wo ist der Bahnhof?</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="story" style="font-size:14px;margin-bottom:8px;margin-top:18px">Nad morzem i nagłe przypadki</h3>
+      <table class="phrase-table">
+        <thead><tr><th>Po polsku</th><th>Auf Deutsch</th></tr></thead>
+        <tbody>
+          <tr><td>Zakaz kąpieli</td><td>Badeverbot</td></tr>
+          <tr><td>Meduzy w wodzie</td><td>Quallen im Wasser</td></tr>
+          <tr><td>Pomocy!</td><td>Hilfe!</td></tr>
+          <tr><td>Pogotowie</td><td>Notruf 112</td></tr>
+          <tr><td>Policja</td><td>Polizei 110</td></tr>
+          <tr><td>Potrzebuję lekarza</td><td>Ich brauche einen Arzt</td></tr>
+        </tbody>
+      </table>
+
+      <div class="light-box" style="margin-top:14px">
+        <div class="section-label">Słowo o dialekcie</div>
+        <p class="body" style="font-size:13px;margin-top:6px">W całych Niemczech Północnych powitaniem jest <em>Moin</em> lub <em>Moin Moin</em>. Mówi się tak rano, w południe i wieczorem. Nie pytaj dlaczego — <em>Moin</em> zawsze działa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Kurier Bałtycki</strong> · Lato 2026 · Kronika podróżnicza<br>
+  <span style="margin-top:6px;display:block;font-size:10px">Meklemburgia-Pomorze Przednie, Niemcy · Do użytku osobistego</span>
+  <span style="margin-top:4px;display:block;font-size:10px;color:#666">Źródła: wir-hier-in-mv.de · National Geographic Traveller · Baltic Waters · GermanPedia · Berghoff &amp; Balbier (Cambridge UP) · Reddit/AskAGerman · Paul Scraton · HUMAL 2017 · dpa/Zeit Online · whysogermany.com</span>
+</footer>
+
+<button id="btt" aria-label="Wróć na górę">↑</button>
+
+<script>
+(function(){
+  var pb=document.getElementById('pb');
+  var btt=document.getElementById('btt');
+  var sections=Array.from(document.querySelectorAll('section[id]'));
+  var links=Array.from(document.querySelectorAll('.nav-in a'));
+
+  function tick(){
+    var s=window.scrollY;
+    var t=document.documentElement.scrollHeight-window.innerHeight;
+    pb.style.width=(t>0?(s/t*100):0)+'%';
+    btt.classList.toggle('vis',s>600);
+    var cur='';
+    sections.forEach(function(el){if(s>=el.offsetTop-70)cur=el.id;});
+    links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});
+  }
+
+  window.addEventListener('scroll',tick,{passive:true});
+  btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  tick();
+})();
+</script>
+</body>
+</html>
