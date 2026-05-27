@@ -48,6 +48,12 @@ nav{position:sticky;top:0;background:var(--ink);z-index:900}
   font-weight:400;
 }
 .nav-in a:hover,.nav-in a.active{background:#333}
+nav::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:44px;
+  background:linear-gradient(to right,transparent,var(--ink));
+  pointer-events:none;opacity:0;transition:opacity .2s;z-index:1;
+}
+nav.nav-more::after{opacity:1}
 
 /* ── MASTHEAD ── */
 .masthead{padding:18px 24px 14px;border-bottom:3px solid var(--ink)}
@@ -244,6 +250,15 @@ p.body:last-child{margin-bottom:0}
 #btt.vis{opacity:1}
 @media(max-width:900px){#btt{right:1rem}}
 
+.top-link{
+  float:right;clear:right;
+  font-family:var(--sans);font-size:9px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  border:.5px solid var(--rule);padding:4px 8px;margin-top:5px;
+  transition:color .15s,border-color .15s;
+}
+.top-link:hover{color:var(--ink);border-color:var(--ink)}
+
 /* ── FOOTER ── */
 footer{
   background:var(--ink);color:#aaa;
@@ -302,7 +317,7 @@ footer strong{color:#faf8f4}
 <section class="section" id="region">
   <div class="grid-2-1">
     <div class="col">
-      <div class="section-label">Artykuł wstępny</div>
+      <div class="section-label">Na Początek</div>
       <h1 class="story">Między historią a morzem</h1>
       <p class="deck">O Meklemburgii żartowano kiedyś, że gdy skończy się świat, najlepiej być właśnie tam — bo wszystko dociera tam sto lat później. Trudno znaleźć w Niemczech drugi region, który równie konsekwentnie opierałby się pośpiechowi.</p>
       <div class="byline">Od naszego korespondenta · Rostock</div>
@@ -315,7 +330,7 @@ footer strong{color:#faf8f4}
       <img src="images/1280px-2019_Rugia-_Nationalpark_Jasmund_-_03.jpg"
            alt="Klify kredowe Königsstuhl, Park Narodowy Jasmund, Rugia"
            id="img-rugia-klify" class="photo">
-      <p class="caption">Kredowe klify Königsstuhl na Rugii — takie jak na obrazach Friedricha z 1818 roku, nie bylibyśmy sobą, gdybyśmy ich nie pominęli.</p>
+      <p class="caption">Kredowe klify Königsstuhl na Rugii — takie jak na obrazach Friedricha z 1818 roku - nie bylibyśmy sobą, gdybyśmy ich nie pominęli.</p>
 
       <div class="dark-box">
         <div class="section-label">Region w liczbach</div>
@@ -335,12 +350,6 @@ footer strong{color:#faf8f4}
     </div>
   </div>
 
-  <div class="stat-row" style="margin-top:20px">
-    <div class="stat-item"><div class="stat-num">€37 656</div><div class="stat-lbl">PKB na mieszkańca (2024)</div></div>
-    <div class="stat-item"><div class="stat-num">7,8%</div><div class="stat-lbl">Bezrobocie</div></div>
-    <div class="stat-item"><div class="stat-num">160 tys.</div><div class="stat-lbl">Miejsca pracy w turystyce</div></div>
-    <div class="stat-item"><div class="stat-num">~2 000</div><div class="stat-lbl">Jezior w regionie</div></div>
-  </div>
 </section>
 
 <!-- ═══ ŚWIAT HANZY ═══ -->
@@ -360,11 +369,11 @@ footer strong{color:#faf8f4}
       <h3 class="story">Narodziny i fundamenty</h3>
       <p class="body">Hanza nie była ani państwem, ani sojuszem militarnym w dzisiejszym rozumieniu. Była siecią zaufania — systemem wzajemnych gwarancji handlowych, wspólnych interesów i zbiorowej zdolności wywierania nacisku na tych, którzy łamali reguły. Za jeden z momentów jej narodzin uznaje się układ Lubeki z Hamburgiem z 1241 roku. W ciągu kolejnych dwóch stuleci sieć rozrosła się do blisko 200 miast i osad, od Londynu po Nowogród.</p>
       <p class="body">Jej geograficznym fundamentem był Bałtyk — stosunkowo spokojne, płytkie i półzamknięte morze, które sprzyjało żegludze i handlowi morskiemu. Ale siła Hanzy wynikała nie tylko z morza, lecz także z położenia. Północne Niemcy leżały na styku Skandynawii, Europy słowiańskiej, Anglii i Niderlandów, stając się jednym z najważniejszych punktów pośredniczących między wschodem dostarczającym surowce a zachodem, który ich potrzebował. Hanza handlowała przede wszystkim towarami masowymi — zbożem, drewnem, solą i rybami — choć przez jej porty przepływały również dobra luksusowe.</p>
-      <p class="body">Kluczowe znaczenie miała również sieć rzeczna. We wczesnym średniowieczu transport lądowy był powolny, kosztowny i ryzykowny. Rzeki pozwalały przewozić ciężkie ładunki szybciej, taniej i zwykle bezpieczniej. Ren, Łaba, Wezera, Odra i Wisła łączyły wnętrze kontynentu z Bałtykiem i Morzem Północnym, tworząc naturalny system transportowy między portami a zapleczem Europy Środkowej i Wschodniej. Lubeka, położona blisko przesmyku między Bałtykiem a Morzem Północnym, wykorzystała to położenie lepiej niż jakiekolwiek inne miasto — stając się bramą między oboma światami.</p>
-      <div class="pullquote">
-        <p>„Spichlerze Stralsundu przechowywały solonego śledzia, który trafiał potem daleko w głąb Europy — na stoły miast, klasztorów i kupieckich domów."</p>
-      </div>
-      <p class="body">Lübeck — dziś w Szlezwiku-Holsztynie, lecz duchowa stolica Hanzy — nosiła tytuł <em>Königin der Hanse</em>, Królowej Hanzy. To tutaj najczęściej zbierały się zjazdy hanzeatyckie (Hansetage), a <em>prawo lubeckie</em> stało się wzorem ustrojowym dla wielu miast nad Bałtykiem. Cztery miasta dzisiejszej Meklemburgii-Pomorza Przedniego weszły w orbitę Hanzy bardzo wcześnie: Rostock, Wismar, Stralsund i Greifswald.</p>
+      <img src="images/960px-Luebeck,_Holstentor_--_2017_--_0305.jpg"
+           alt="Holstentor — gotycka brama miejska Lubeki, symbol Hanzy"
+           id="img-holstentor" class="photo" style="margin-top:14px">
+      <p class="caption"><em>Holstentor</em>, Lubeka (zbudowany 1464–1478). Dwie masywne okrągłe baszty gotyckiego portalu wejściowego do „Królowej Hanzy" — jeden z najlepiej zachowanych symboli potęgi kupieckiej Północy.</p>
+      
     </div>
     <div class="col">
       <div class="dark-box">
@@ -380,10 +389,11 @@ footer strong{color:#faf8f4}
           <tr><td style="color:#ccc">UNESCO: Stralsund i Wismar</td><td>2002</td></tr>
         </table>
       </div>
-      <img src="images/960px-Luebeck,_Holstentor_--_2017_--_0305.jpg"
-           alt="Holstentor — gotycka brama miejska Lubeki, symbol Hanzy"
-           id="img-holstentor" class="photo" style="margin-top:14px">
-      <p class="caption"><em>Holstentor</em>, Lubeka (zbudowany 1464–1478). Dwie masywne okrągłe baszty gotyckiego portalu wejściowego do „Królowej Hanzy" — jeden z najlepiej zachowanych symboli potęgi kupieckiej Północy.</p>
+      <p class="body">Kluczowe znaczenie miała również sieć rzeczna. We wczesnym średniowieczu transport lądowy był powolny, kosztowny i ryzykowny. Rzeki pozwalały przewozić ciężkie ładunki szybciej, taniej i zwykle bezpieczniej. Ren, Łaba, Wezera, Odra i Wisła łączyły wnętrze kontynentu z Bałtykiem i Morzem Północnym, tworząc naturalny system transportowy między portami a zapleczem Europy Środkowej i Wschodniej. Lubeka, położona blisko przesmyku między Bałtykiem a Morzem Północnym, wykorzystała to położenie lepiej niż jakiekolwiek inne miasto — stając się bramą między oboma światami.</p>
+      <div class="pullquote">
+        <p>„Spichlerze Stralsundu przechowywały solonego śledzia, który trafiał potem daleko w głąb Europy — na stoły miast, klasztorów i kupieckich domów."</p>
+      </div>
+      <p class="body">Lübeck — dziś w Szlezwiku-Holsztynie, lecz duchowa stolica Hanzy — nosiła tytuł <em>Königin der Hanse</em>, Królowej Hanzy. To tutaj najczęściej zbierały się zjazdy hanzeatyckie (Hansetage), a <em>prawo lubeckie</em> stało się wzorem ustrojowym dla wielu miast nad Bałtykiem. Cztery miasta dzisiejszej Meklemburgii-Pomorza Przedniego weszły w orbitę Hanzy bardzo wcześnie: Rostock, Wismar, Stralsund i Greifswald.</p>
       <div class="light-box">
         <div class="section-label">Miasta hanseatyckie MV</div>
         <p class="body" style="font-size:12.5px;line-height:1.9;margin-top:6px">
@@ -440,9 +450,9 @@ footer strong{color:#faf8f4}
       <p class="body"><em>Kontory</em> były stałymi placówkami kupieckimi Hanzy w najważniejszych miastach Europy. Działały na podstawie szerokich przywilejów i cieszyły się znaczną autonomią: miały własną administrację, wewnętrzne regulaminy i rozstrzygały wiele sporów według własnych zasad. Kupiec hanzeatycki w Londynie czy Bergen potrafił spędzić tam całe miesiące — mieszkając i handlując w zamkniętej wspólnocie, zwykle z ograniczonym kontaktem z lokalną ludnością, ale z pełnym wsparciem sieci: prawnym, organizacyjnym i handlowym.</p>
       <p class="body">Cztery wielkie kontory wyznaczały zasięg Hanzy. <strong>Steelyard w Londynie</strong> dawał dostęp do angielskiej wełny, sukna i metali. <strong>Brugia</strong> była zachodnim centrum finansowym i handlowym — miejscem przecięcia szlaków flandryjskich, włoskich i iberyjskich. <strong>Bryggen w Bergen</strong> kontrolował handel norweskim sztokfiszem; stojące tam drewniane magazyny zachowały się do dziś i znajdują się na liście UNESCO. <strong>Peterhof w Nowogrodzie Wielkim</strong> otwierał drogę na Ruś — do futer, wosku, miodu i innych towarów ze wschodu.</p>
       <p class="body">Przynależność do Hanzy nie była licencją handlową. Była dostępem do sieci przewag, których pojedynczy kupiec nie byłby w stanie wynegocjować sam. Kupcy hanzeatyccy korzystali z preferencyjnych ceł i przywilejów handlowych uzyskiwanych przez całe miasta lub przez Hanzę jako całość. Mieli dostęp do magazynów, nabrzeży, wag i infrastruktury portowej na warunkach ustalanych wcześniej z lokalnymi władzami. W wielu przypadkach spory rozstrzygano wewnątrz kontoru lub przez starszyznę kupiecką, bez konieczności odwoływania się do miejscowego sądu.</p>
-      <p class="body">Równie cenna była informacja. Sieć kupiecka pozwalała szybko przekazywać wiadomości o cenach, popycie, nieurodzaju, wojnach czy blokadach portów. Kupiec w Lubece mógł wiedzieć wcześniej niż konkurenci, ile kosztuje wełna w Londynie albo czy w Bergen rośnie zapotrzebowanie na sól. Podobnie działał kredyt: nie poprzez jednolity system finansowy, lecz przez reputację, powiązania rodzinne i zaufanie budowane między domami kupieckimi rozsianymi po całej północnej Europie.</p>
     </div>
     <div class="col">
+      <p class="body">Równie cenna była informacja. Sieć kupiecka pozwalała szybko przekazywać wiadomości o cenach, popycie, nieurodzaju, wojnach czy blokadach portów. Kupiec w Lubece mógł wiedzieć wcześniej niż konkurenci, ile kosztuje wełna w Londynie albo czy w Bergen rośnie zapotrzebowanie na sól. Podobnie działał kredyt: nie poprzez jednolity system finansowy, lecz przez reputację, powiązania rodzinne i zaufanie budowane między domami kupieckimi rozsianymi po całej północnej Europie.</p>
       <div class="light-box">
         <div class="section-label">Pakiet hanzeatycki</div>
         <p class="body" style="font-size:12.5px;line-height:1.9;margin-top:6px">
@@ -467,29 +477,19 @@ footer strong{color:#faf8f4}
     <div class="col">
       <p class="body">W latach 1347–1351 Czarna Śmierć zabiła ogromną część populacji Europy. W wielu regionach śmiertelność sięgała od jednej trzeciej do połowy mieszkańców, a lokalnie nawet więcej. Był to jeden z największych wstrząsów demograficznych w historii kontynentu — i wydarzenie, które głęboko zmieniło europejską gospodarkę.</p>
       <p class="body">Już wcześniej średniowieczne rolnictwo działało na granicy wydolności. Produkcja była zależna od ogromnych nakładów pracy, a plony pozostawały niskie i niestabilne. Po epidemii w wielu regionach zabrakło rąk do pracy. Spadła produkcja rolna, zmieniły się relacje między miastem a wsią, a handel żywnością i surowcami nabrał jeszcze większego znaczenia.</p>
-      <p class="body">Hanza była na ten moment dobrze przygotowana. Od dziesięcioleci kontrolowała gęstą sieć połączeń między Bałtykiem, Morzem Północnym i zapleczem Europy Środkowej. Dysponowała statkami, portami, kontorami i rozbudowaną siecią kupieckich kontaktów. W świecie zachwianym kryzysem demograficznym i gospodarczym takie struktury zyskały jeszcze większą wartość.</p>
-      <p class="body">W drugiej połowie XIV wieku potęga Hanzy stała się szczególnie widoczna. Traktat stralsundzki z 1370 roku, kończący wojnę z Danią, przyniósł miastom hanzeatyckim szerokie przywileje handlowe, wpływ na dochody ze Skanii oraz czasową kontrolę nad wybranymi zamkami. Był jednym z najbardziej wyrazistych pokazów siły kupieckiej sieci wobec monarchii.</p>
     </div>
     <div class="col">
-      <div class="dark-box">
-        <div class="section-label">Hanza w datach kluczowych</div>
-        <table class="numbers-table">
-          <tr><td style="color:#ccc">Umowa Hamburg–Lubeka</td><td>1241</td></tr>
-          <tr><td style="color:#ccc">Kontor w Nowogrodzie</td><td>ok. 1270</td></tr>
-          <tr><td style="color:#ccc">Czarna Śmierć w Europie</td><td>1347–51</td></tr>
-          <tr><td style="color:#ccc">Traktat ze Stralsundu</td><td>1370</td></tr>
-          <tr><td style="color:#ccc">Szczyt: ~200 miast</td><td>ok. 1400</td></tr>
-          <tr><td style="color:#ccc">Spadek znaczenia połowów skanejskich</td><td>XV w.</td></tr>
-          <tr><td style="color:#ccc">Ostatni Hansetag</td><td>1669</td></tr>
-          <tr><td style="color:#ccc">UNESCO: Stralsund i Wismar</td><td>2002</td></tr>
-        </table>
-      </div>
+      <p class="body">Hanza była na ten moment dobrze przygotowana. Od dziesięcioleci kontrolowała gęstą sieć połączeń między Bałtykiem, Morzem Północnym i zapleczem Europy Środkowej. Dysponowała statkami, portami, kontorami i rozbudowaną siecią kupieckich kontaktów. W świecie zachwianym kryzysem demograficznym i gospodarczym takie struktury zyskały jeszcze większą wartość.</p>
+      <p class="body">W drugiej połowie XIV wieku potęga Hanzy stała się szczególnie widoczna. Traktat stralsundzki z 1370 roku, kończący wojnę z Danią, przyniósł miastom hanzeatyckim szerokie przywileje handlowe, wpływ na dochody ze Skanii oraz czasową kontrolę nad wybranymi zamkami. Był jednym z najbardziej wyrazistych pokazów siły kupieckiej sieci wobec monarchii.</p>
     </div>
   </div>
 
   <!-- PART 5: Collapse -->
   <div style="margin-top:24px;padding-top:20px;border-top:.5px solid var(--rule)">
-    <h3 class="story">Przyczyny upadku: pięć uderzeń, które rozkruszyły imperium</h3>
+    <h3 class="story">Przyczyny upadku</h3>
+  </div>
+  <div class="pullquote" style="margin-top:16px">
+    <p>„Hanza nie umarła od jednego ciosu. Rozpadła się powoli, jak stara beczka po śledziu — szew po szwie, klepka po klepce."</p>
   </div>
   <div class="place-grid" style="gap:12px;margin-top:12px">
     <div class="dark-box" style="margin:0">
@@ -523,10 +523,6 @@ footer strong{color:#faf8f4}
       <p style="font-size:12px;line-height:1.6;margin:0">W XVI i XVII wieku osłabła także finansowa przewaga Hanzy. Kupcy hanzeatyccy od dawna korzystali z kredytu i partnerstw kapitałowych, ale system ten opierał się głównie na osobistych relacjach i zamkniętej sieci zaufania. Amsterdam potrafił te same narzędzia wyskalować: kredyt, ubezpieczenie i inwestowanie w handel stały się tańsze, szybsze i dostępne dla znacznie większej liczby uczestników rynku. Handel przestał wymagać przynależności do hanzeatyckiej wspólnoty.</p>
     </div>
   </div>
-  <div class="pullquote" style="margin-top:16px">
-    <p>„Hanza nie umarła od jednego ciosu. Rozpadła się powoli, jak stara beczka po śledziu — szew po szwie, klepka po klepce."</p>
-  </div>
-
   </div>
 </section>
 
@@ -549,15 +545,18 @@ footer strong{color:#faf8f4}
         <p>„Płynąłem po gwiazdach. Wiedziałem: jeśli dotrę do rana, będę wolny. Jeśli nie — wrócę do więzienia albo nie wrócę w ogóle."</p>
         <cite>— Peter Döbler, rekonstrukcja (Kühlungsborn, 1971)</cite>
       </div>
-    </div>
-    <div class="col">
-
-
-      <h3 class="story">Pogrom w Lichtenhagen — 1992</h3>
+            <h3 class="story">Pogrom w Lichtenhagen — 1992</h3>
       <img src="images/Rostock-Lichtenhagen_Sonnenblumenhaus.jpg"
            alt="Dom Słoneczników (Sonnenblumenhaus) w Rostock-Lichtenhagen"
            id="img-sonnenblumenhaus" class="photo">
       <p class="caption"><em>Sonnenblumenhaus</em> — Dom Słoneczników w Rostock-Lichtenhagen. W sierpniu 1992 roku tłum oblegał go przez kilka dni.</p>
+      
+    </div>
+
+
+    <div class="col">
+
+
       <p class="body">Dwa lata po zjednoczeniu, w sierpniu 1992 roku, Rostock-Lichtenhagen stał się miejscem najpoważniejszych rasistowskich ataków w Niemczech po 1945 roku. Przez kilka dni tłum oblegał tzw. Dom Słoneczników (Sonnenblumenhaus), w którym mieścił się ośrodek dla osób ubiegających się o azyl oraz mieszkania wietnamskich robotników kontraktowych z czasów NRD. W budynek rzucano kamieniami i koktajlami Mołotowa, a tysiące gapiów przyglądały się temu z aplauzem. Policja była nieprzygotowana, momentami całkowicie wycofała się z miejsca wydarzeń, pozostawiając uwięzionych mieszkańców bez ochrony. Cudem nikt nie zginął.</p>
       <p class="body">Do dziś wydarzenia w Rostock-Lichtenhagen pozostają jednym z najmocniej analizowanych epizodów w historii zjednoczonych Niemiec — jako symbol przemocy rasistowskiej lat 90., ale też państwowej bezradności i społecznego przyzwolenia.</p>
       <h3 class="story">Wyludnienie po 1990</h3>
@@ -619,22 +618,23 @@ footer strong{color:#faf8f4}
       <div class="section-label" style="margin-bottom:3px">1945–1950</div>
       <strong style="font-family:var(--serif);font-size:14px;line-height:1.2;display:block;margin-bottom:4px">Wysiedleni z Kresów</strong>
       <p class="body" style="font-size:12px;color:#444;margin:0 0 16px;line-height:1.55">910 tys. uchodźców i wysiedlonych ze Śląska i Prus Wschodnich. Największa fala w historii regionu — w ciągu miesięcy zmieniła demografię MV.</p>
-      <div class="section-label" style="margin-bottom:3px">po 2004</div>
-      <strong style="font-family:var(--serif);font-size:14px;line-height:1.2;display:block;margin-bottom:4px">Polacy</strong>
-      <p class="body" style="font-size:12px;color:#444;margin:0;line-height:1.55">Migracja zarobkowa po wejściu do UE, napędzana tanimi nieruchomościami przy granicy. W niektórych wsiach Vorpommern-Greifswald Polacy stanowią dziś większość mieszkańców poniżej 50. roku życia.</p>
-    </div>
-    <div class="place-col">
       <div class="section-label" style="margin-bottom:3px">od ok. 1980</div>
       <strong style="font-family:var(--serif);font-size:14px;line-height:1.2;display:block;margin-bottom:4px">Wietnamczycy NRD</strong>
       <p class="body" style="font-size:12px;color:#444;margin:0 0 16px;line-height:1.55">60 tys. robotników kontraktowych sprowadzonych umową z Wietnamem. Warunki: 5–6 m² pokoju, nadzór Stasi, 12% pensji odprowadzane do Hanoi. Dziś największa mniejszość etniczna MV.</p>
-      <div class="section-label" style="margin-bottom:3px">2015–2016</div>
-      <strong style="font-family:var(--serif);font-size:14px;line-height:1.2;display:block;margin-bottom:4px">Uchodźcy</strong>
-      <p class="body" style="font-size:12px;color:#444;margin:0;line-height:1.55">23 tys. osób, w tym 13,5 tys. Syryjczyków. Region bez tradycji wielokulturowości stanął przed nowym wyzwaniem — bez wypracowanych mechanizmów integracji.</p>
+      
     </div>
     <div class="place-col">
       <div class="section-label" style="margin-bottom:3px">po 1990</div>
       <strong style="font-family:var(--serif);font-size:14px;line-height:1.2;display:block;margin-bottom:4px">Russlanddeutsche</strong>
       <p class="body" style="font-size:12px;color:#444;margin:0 0 16px;line-height:1.55">Niemcy z byłego ZSRR — Rosji i Kazachstanu. Prawnie Niemcy, kulturowo zawieszeni między dwoma światami. Niewidoczni w statystykach migracyjnych, bo mają obywatelstwo.</p>
+      <div class="section-label" style="margin-bottom:3px">po 2004</div>
+      <strong style="font-family:var(--serif);font-size:14px;line-height:1.2;display:block;margin-bottom:4px">Polacy</strong>
+      <p class="body" style="font-size:12px;color:#444;margin:0;line-height:1.55">Migracja zarobkowa po wejściu do UE, napędzana tanimi nieruchomościami przy granicy. W niektórych wsiach Vorpommern-Greifswald Polacy stanowią dziś większość mieszkańców poniżej 50. roku życia.</p>
+    </div>
+    <div class="place-col">
+      <div class="section-label" style="margin-bottom:3px">2015–2016</div>
+      <strong style="font-family:var(--serif);font-size:14px;line-height:1.2;display:block;margin-bottom:4px">Uchodźcy</strong>
+      <p class="body" style="font-size:12px;color:#444;margin:0;line-height:1.55">23 tys. osób, w tym 13,5 tys. Syryjczyków. Region bez tradycji wielokulturowości stanął przed nowym wyzwaniem — bez wypracowanych mechanizmów integracji.</p>
       <div class="section-label" style="margin-bottom:3px">od XIV w.</div>
       <strong style="font-family:var(--serif);font-size:14px;line-height:1.2;display:block;margin-bottom:4px">Sinti i Romowie</strong>
       <p class="body" style="font-size:12px;color:#444;margin:0;line-height:1.55">Ponad 700 lat obecności. Na terenie MV działało 14 podobozów Ravensbrück. Dziś brak jakichkolwiek oficjalnych statystyk o tej społeczności. Niewidzialni systemowo.</p>
@@ -665,13 +665,18 @@ footer strong{color:#faf8f4}
 
   <div class="grid-2">
     <div class="col">
+      <div class="section-label" style="margin-top:16px">Malarstwo · Greifswald</div>
+      <h3 class="story">Caspar David Friedrich</h3>
       <img src="images/1280px-Caspar_David_Friedrich_-_Der_Monch_am_Meer_-_Google_Art_Project.jpg"
            alt="Caspar David Friedrich — Mnich nad morzem (1808–1810)"
            id="img-cdf" class="photo">
       <p class="caption"><em>Mnich nad morzem</em>, 1808–10 — człowiek tyłem do widza, twarzą do nieskończoności. Wystawiony razem z <em>Opactwem</em> w Berlinie w 1810 roku; oba kupione parą przez następcę tronu pruskiego.</p>
-      <div class="section-label" style="margin-top:16px">Malarstwo · Greifswald</div>
-      <h3 class="story">Caspar David Friedrich</h3>
+      
       <p class="body">Friedrich urodził się w 1774 roku w Greifswald i przez całe życie malował bałtyckie światło. <em>Mnich nad morzem</em> (1808–10) i <em>Opactwo w dębowym lesie</em> — oba zakupione przez następcę tronu pruskiego na wystawie berlińskiej — były rewolucyjne: człowiek stał tyłem do widza, patrząc w nieskończoność. Krajobraz przestał być tłem, stał się tematem. Greifswald przechowuje rysunki i kilka płócien w muzeum miejskim.</p>
+      <img src="images/1280px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg"
+           alt="Caspar David Friedrich — Opactwo w dębowym lesie (1809–1810)"
+           id="img-abtei" class="photo">
+      <p class="caption"><em>Opactwo w dębowym lesie</em>, 1809–10 — procesja mnichów przez zimowy cmentarz, ruiny gotyckiej nawy, gołe dęby.</p>
       <hr style="border:none;border-top:.5px solid var(--rule);margin:18px 0 14px">
       <div class="section-label">Literatura · Hiddensee</div>
       <h3 class="story">Gerhart Hauptmann</h3>
@@ -679,10 +684,7 @@ footer strong{color:#faf8f4}
       <p class="body">Kolaboracja czy przetrwanie? Kompromis konieczny czy ludzki odruch silniejszy od strachu? Jego dom na Hiddensee jest dziś muzeum. Wyspa jest cicha i dostępna wyłącznie promem — właściwe miejsce na pytanie bez odpowiedzi.</p>
     </div>
     <div class="col">
-      <img src="images/1280px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg"
-           alt="Caspar David Friedrich — Opactwo w dębowym lesie (1809–1810)"
-           id="img-abtei" class="photo">
-      <p class="caption"><em>Opactwo w dębowym lesie</em>, 1809–10 — procesja mnichów przez zimowy cmentarz, ruiny gotyckiej nawy, gołe dęby.</p>
+      
       <div class="section-label" style="margin-top:16px">Literatura · Greifswald / Carwitz</div>
       <h3 class="story">Hans Fallada</h3>
       <p class="body">Naprawdę nazywał się Rudolf Ditzen. Pseudonimu szukał w bajkach braci Grimm i znalazł dwa: <em>Hans im Glück</em> — prostak, który wszystko oddaje i wraca z niczym — oraz <em>Falada</em>, ścięta głowa konia zawieszona nad bramą, która mówi prawdę nawet po śmierci. To ostatnie było wyborem programowym. Fallada pisał prawdę o Niemczech z wnętrza dyktatury — nie z bezpiecznej emigracji, lecz tu, na miejscu, ukrywając się za imieniem z bajki.</p>
@@ -813,10 +815,10 @@ footer strong{color:#faf8f4}
 
   <div class="light-box" style="margin-top:20px;margin-bottom:20px">
     <div class="section-label">Słowo o dialekcie</div>
-    <p class="body" style="font-size:13px;margin-top:6px">W całych Niemczech Północnych powitaniem jest <em>Moin</em> lub <em>Moin Moin</em>. Mówi się tak rano, w południe i wieczorem. Nie pytaj dlaczego — <em>Moin</em> zawsze działa.</p>
+    <p class="body" style="font-size:13px;margin-top:6px">W całych północnych Niemczech najpewniejszym powitaniem jest <em>Moin</em> — czasem <em>Moin Moin</em>. Mówi się tak o każdej porze dnia. To jedno z tych słów, które najlepiej przetrwały z dawnego dolnoniemieckiego dialektu północy.</p>
   </div>
 
-  <h3 class="story" style="font-size:14px;margin-bottom:4px">Zwroty zaawansowane - Używać z rozwagą lub w ogóle nie używać.</h3>
+  <h3 class="story" style="font-size:14px;margin-bottom:4px">Zwroty zaawansowane - używać z rozwagą lub w ogóle nie używać.</h3>
   <table class="phrase-table">
     <thead>
       <tr>
@@ -877,6 +879,24 @@ footer strong{color:#faf8f4}
     sections.forEach(function(el){if(s>=el.offsetTop-70)cur=el.id;});
     links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});
   }
+
+  document.querySelectorAll('section.section:not(#region) h2.story').forEach(function(h2){
+    var a=document.createElement('a');
+    a.className='top-link';
+    a.textContent='↑ góra';
+    a.href='#';
+    a.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
+    h2.parentElement.insertBefore(a,h2);
+  });
+
+  var navIn=document.querySelector('.nav-in');
+  var navEl=document.querySelector('nav');
+  function updateNavFade(){
+    navEl.classList.toggle('nav-more',navIn.scrollWidth>navIn.clientWidth+4&&navIn.scrollLeft<navIn.scrollWidth-navIn.clientWidth-4);
+  }
+  navIn.addEventListener('scroll',updateNavFade,{passive:true});
+  window.addEventListener('resize',updateNavFade,{passive:true});
+  updateNavFade();
 
   window.addEventListener('scroll',tick,{passive:true});
   btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
